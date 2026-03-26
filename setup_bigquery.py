@@ -42,6 +42,8 @@ def create_submissions_table():
         bigquery.SchemaField("last_name", "STRING"),
         bigquery.SchemaField("preferred_name", "STRING"),
         bigquery.SchemaField("school_location", "STRING"),
+        bigquery.SchemaField("phone", "STRING"),
+        bigquery.SchemaField("physical_address", "STRING"),
         bigquery.SchemaField("tshirt_size", "STRING"),
         bigquery.SchemaField("dietary_needs", "STRING"),
         bigquery.SchemaField("food_allergies", "STRING"),

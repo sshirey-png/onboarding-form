@@ -183,9 +183,9 @@ def send_submission_confirmation(sub):
 
             <p><strong>What happens next?</strong></p>
             <ul>
-                <li>Our HR team will reach out with your start date and orientation details</li>
+                <li>Our team will stay in touch with you to support your onboarding</li>
                 <li>You'll receive information about benefits enrollment</li>
-                <li>We'll have your welcome kit (including your t-shirt!) ready for you</li>
+                <li>We'll have your welcome kit ready for you</li>
                 <li>Your school leader will be in touch to welcome you to your team</li>
             </ul>
 
@@ -219,6 +219,8 @@ def send_new_submission_alert(sub):
                 <p style="margin: 5px 0;"><strong>Name:</strong> {sub['first_name']} {sub['last_name']}</p>
                 <p style="margin: 5px 0;"><strong>Preferred Name:</strong> {sub['preferred_name']}</p>
                 <p style="margin: 5px 0;"><strong>Email:</strong> {sub['email']}</p>
+                <p style="margin: 5px 0;"><strong>Phone:</strong> {sub['phone']}</p>
+                <p style="margin: 5px 0;"><strong>Address:</strong> {sub['physical_address']}</p>
                 <p style="margin: 5px 0;"><strong>School/Location:</strong> {sub['school_location']}</p>
                 <p style="margin: 5px 0;"><strong>T-Shirt Size:</strong> {sub['tshirt_size']}</p>
             </div>
@@ -261,6 +263,8 @@ def row_to_dict(row):
         'last_name': row.last_name or '',
         'preferred_name': row.preferred_name or '',
         'school_location': row.school_location or '',
+        'phone': getattr(row, 'phone', '') or '',
+        'physical_address': getattr(row, 'physical_address', '') or '',
         'tshirt_size': row.tshirt_size or '',
         'dietary_needs': row.dietary_needs or '',
         'food_allergies': row.food_allergies or '',
@@ -435,6 +439,7 @@ def submit_form():
         data = request.json
 
         required_fields = ['email', 'first_name', 'last_name', 'preferred_name', 'school_location',
+                          'phone', 'physical_address',
                           'tshirt_size', 'dietary_needs', 'food_allergies',
                           'reading_certification', 'numeracy_coursework', 'ada_accommodation']
 
@@ -453,6 +458,8 @@ def submit_form():
             'last_name': data.get('last_name', ''),
             'preferred_name': data.get('preferred_name', ''),
             'school_location': data.get('school_location', ''),
+            'phone': data.get('phone', ''),
+            'physical_address': data.get('physical_address', ''),
             'tshirt_size': data.get('tshirt_size', ''),
             'dietary_needs': data.get('dietary_needs', ''),
             'food_allergies': data.get('food_allergies', ''),
